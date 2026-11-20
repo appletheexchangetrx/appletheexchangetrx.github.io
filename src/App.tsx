@@ -3,6 +3,7 @@ import AppShell from './components/AppShell'
 import Overlay from './components/Overlay'
 import SplashScreen from './components/SplashScreen'
 import StandalonePages from './components/StandalonePages'
+import Storefront from './components/Storefront'
 
 function App() {
   const [isSplashVisible, setIsSplashVisible] = useState(true)
@@ -26,13 +27,7 @@ function App() {
   return (
     <>
       <AppShell>
-        <section className="welcome-content">
-          <h1>Apple The Exchange TRX</h1>
-          <p className="description">
-            Welcome. Your React, Vite, and TypeScript website is ready.
-          </p>
-          <span className="status">GitHub Pages starter is running</span>
-        </section>
+        <Storefront />
       </AppShell>
       <Overlay />
     </>
