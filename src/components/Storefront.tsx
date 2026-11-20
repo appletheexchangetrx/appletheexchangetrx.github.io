@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { Button, Card, Chip, Searchbar } from 'konsta/react'
 
 const categories = ['All', 'iPhone', 'iPad', 'Mac', 'Watch', 'Audio']
 
@@ -52,30 +51,33 @@ export default function Storefront() {
       </div>
 
       <div className="storefront-search">
-        <Searchbar
+        <input
+          className="storefront-search-input"
+          type="search"
           value={search}
           placeholder="Search products"
-          onInput={(event) => setSearch(event.target.value)}
-          onClear={() => setSearch('')}
+          aria-label="Search products"
+          onChange={(event) => setSearch(event.target.value)}
         />
       </div>
 
       <div className="storefront-categories" role="group" aria-label="Product categories">
         {categories.map((item) => (
-          <Chip
+          <button
             key={item}
-            outline={category !== item}
-            className={category === item ? 'storefront-chip-active' : 'storefront-chip'}
+            type="button"
+            className={`storefront-category-chip${category === item ? ' is-active' : ''}`}
+            aria-pressed={category === item}
             onClick={() => setCategory(item)}
           >
             {item}
-          </Chip>
+          </button>
         ))}
       </div>
 
       <div className="storefront-products" id="store-products">
         {visibleProducts.map((product) => (
-          <Card key={product.id} className="storefront-product-card">
+          <article key={product.id} className="storefront-product-card">
             <div className="storefront-product-image-wrap">
               {product.tag && <span className="storefront-product-tag">{product.tag}</span>}
               <img src={product.image} alt={product.name} loading="lazy" className="storefront-product-image" />
@@ -88,14 +90,14 @@ export default function Storefront() {
                 <strong>{product.price}</strong>
               </div>
             </div>
-          </Card>
+          </article>
         ))}
         {visibleProducts.length === 0 && (
           <div className="storefront-empty">
             <span aria-hidden="true">⌕</span>
             <h3>No products found</h3>
             <p>Try another search or category.</p>
-            <Button clear onClick={() => { setSearch(''); setCategory('All') }}>Clear filters</Button>
+            <button className="storefront-clear-filters" type="button" onClick={() => { setSearch(''); setCategory('All') }}>Clear filters</button>
           </div>
         )}
       </div>
