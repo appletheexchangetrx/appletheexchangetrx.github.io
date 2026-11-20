@@ -237,7 +237,7 @@ h1 {
 .storefront-product-info { padding:12px 11px 11px; }
 .storefront-product-category { color:#86868b; font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
 .storefront-product-info h3 { margin:4px 0; font-size:14px; letter-spacing:-.025em; }
-.storefront-product-info p { min-height:30px; margin:0; color:#86868b; font-size:10px; line-height:1.45; }
+.storefront-product-info p { margin:0; color:#86868b; font-size:10px; line-height:1.45; }
 .storefront-product-footer { display:flex; align-items:center; justify-content:space-between; gap:4px; margin-top:12px; }
 .storefront-product-footer strong { font-size:10px; }
 .storefront-product-footer .k-button { min-width:48px; min-height:30px; padding:0 10px; font-size:11px; }
