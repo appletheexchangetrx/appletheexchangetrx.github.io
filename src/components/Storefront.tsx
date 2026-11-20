@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react'
 import { Button, Card, Chip, Searchbar } from 'konsta/react'
-import { useStorefrontCart } from './AppShell'
 
 const categories = ['All', 'iPhone', 'iPad', 'Mac', 'Watch', 'Audio']
 
@@ -16,7 +15,6 @@ const products = [
 export default function Storefront() {
   const [category, setCategory] = useState('All')
   const [search, setSearch] = useState('')
-  const { addToBag } = useStorefrontCart()
 
   const visibleProducts = useMemo(() => products.filter((product) => {
     const matchesCategory = category === 'All' || product.category === category
@@ -88,7 +86,6 @@ export default function Storefront() {
               <p>{product.detail}</p>
               <div className="storefront-product-footer">
                 <strong>{product.price}</strong>
-                <Button small rounded onClick={addToBag}>Add</Button>
               </div>
             </div>
           </Card>
