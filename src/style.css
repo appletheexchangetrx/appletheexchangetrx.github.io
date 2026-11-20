@@ -287,9 +287,8 @@ h1 {
 .storefront-product-category { color:#86868b; font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
 .storefront-product-info h3 { margin:4px 0; font-size:14px; letter-spacing:-.025em; }
 .storefront-product-info p { margin:0; color:#86868b; font-size:10px; line-height:1.45; }
-.storefront-product-footer { display:flex; align-items:center; justify-content:space-between; gap:4px; margin-top:12px; }
+.storefront-product-footer { display:flex; align-items:center; justify-content:flex-start; margin-top:12px; }
 .storefront-product-footer strong { font-size:10px; }
-.storefront-product-footer .k-button { min-width:48px; min-height:30px; padding:0 10px; font-size:11px; }
 .storefront-empty { grid-column:1/-1; padding:36px 12px; text-align:center; }
 .storefront-empty > span { color:#86868b; font-size:32px; }
 .storefront-empty h3 { margin:8px 0 4px; font-size:16px; }
