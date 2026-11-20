@@ -37,8 +37,6 @@ document.addEventListener('keydown', (event) => {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <KonstaApp theme="ios">
-      <App />
-    </KonstaApp>
+    <App />
   </React.StrictMode>,
 )
