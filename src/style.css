@@ -35,6 +35,7 @@ body {
 
 .app-shell {
   display: flex;
+  height: 100%;
   flex-direction: column;
   width: 100%;
   padding: 24px;
@@ -145,6 +146,7 @@ h1 {
 
 .standalone-page {
   width: 100%;
+  height: 100%;
   padding: 80px 24px;
   text-align: center;
 }
