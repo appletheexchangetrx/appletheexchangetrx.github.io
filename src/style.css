@@ -26,6 +26,8 @@ body {
 }
 
 #root {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 500px;
   margin-inline: auto;
@@ -58,6 +60,8 @@ body {
 
 .app-main {
   display: grid;
+  flex: 1;
+  overflow-y: auto;
   width: 100%;
   place-items: center;
   padding-block: 40px;
