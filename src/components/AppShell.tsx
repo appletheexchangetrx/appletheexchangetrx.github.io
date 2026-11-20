@@ -1,4 +1,7 @@
 import type { ReactNode } from 'react'
+import BottomNav from './BottomNav'
+import Header from './Header'
+import Main from './Main'
 
 type AppShellProps = {
   children: ReactNode
@@ -7,10 +10,9 @@ type AppShellProps = {
 export default function AppShell({ children }: AppShellProps) {
   return (
     <div className="app-shell">
-      <header className="app-header">
-        <span className="app-eyebrow">THE EXCHANGE TRX · KUALA LUMPUR</span>
-      </header>
-      <main className="app-main">{children}</main>
+      <Header />
+      <Main>{children}</Main>
+      <BottomNav />
     </div>
   )
 }
