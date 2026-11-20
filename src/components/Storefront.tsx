@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Heart, MessageCircle, Send } from 'lucide-react'
+import { Heart } from 'lucide-react'
 
 const categories = ['All', 'iPhone', 'iPad', 'Mac', 'Watch', 'Audio']
 
@@ -16,9 +16,7 @@ export default function Storefront() {
   const [category, setCategory] = useState('All')
   const [search, setSearch] = useState('')
   const [likedProducts, setLikedProducts] = useState<string[]>([])
-  const [commentCounts, setCommentCounts] = useState<Record<string, number>>({})
-  const [commentingProduct, setCommentingProduct] = useState<string | null>(null)
-  const [commentDraft, setCommentDraft] = useState('')
+  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({})
 
   const visibleProducts = useMemo(() => products.filter((product) => {
     const matchesCategory = category === 'All' || product.category === category
@@ -98,51 +96,24 @@ export default function Storefront() {
                 <button
                   className={`storefront-social-action${likedProducts.includes(product.id) ? ' is-liked' : ''}`}
                   type="button"
-                  aria-label={likedProducts.includes(product.id) ? `Unlike ${product.name}` : `Like ${product.name}`}
+                  aria-label={`${likedProducts.includes(product.id) ? 'Unlike' : 'Like'} ${product.name}; ${likeCounts[product.id] ?? 0} likes`}
                   aria-pressed={likedProducts.includes(product.id)}
-                  onClick={() => setLikedProducts((current) => current.includes(product.id)
-                    ? current.filter((id) => id !== product.id)
-                    : [...current, product.id])}
+                  onClick={() => {
+                    const isLiked = likedProducts.includes(product.id)
+                    setLikedProducts((current) => isLiked
+                      ? current.filter((id) => id !== product.id)
+                      : [...current, product.id])
+                    setLikeCounts((current) => ({
+                      ...current,
+                      [product.id]: Math.max(0, (current[product.id] ?? 0) + (isLiked ? -1 : 1)),
+                    }))
+                  }}
                 >
                   <Heart size={14} strokeWidth={1.8} fill={likedProducts.includes(product.id) ? 'currentColor' : 'none'} />
-                  <span>{likedProducts.includes(product.id) ? 'Liked' : 'Like'}</span>
-                </button>
-                <button
-                  className="storefront-social-action"
-                  type="button"
-                  aria-label={`Comment on ${product.name}`}
-                  aria-expanded={commentingProduct === product.id}
-                  onClick={() => {
-                    setCommentingProduct((current) => current === product.id ? null : product.id)
-                    setCommentDraft('')
-                  }}
-                >
-                  <MessageCircle size={14} strokeWidth={1.8} />
-                  <span>Comment{commentCounts[product.id] ? ` · ${commentCounts[product.id]}` : ''}</span>
+                  <span>Like</span>
+                  <span className="storefront-like-count">{likeCounts[product.id] ?? 0}</span>
                 </button>
               </div>
-              {commentingProduct === product.id && (
-                <form
-                  className="storefront-comment-form"
-                  onSubmit={(event) => {
-                    event.preventDefault()
-                    if (!commentDraft.trim()) return
-                    setCommentCounts((current) => ({ ...current, [product.id]: (current[product.id] ?? 0) + 1 }))
-                    setCommentDraft('')
-                    setCommentingProduct(null)
-                  }}
-                >
-                  <input
-                    aria-label={`Write a comment on ${product.name}`}
-                    value={commentDraft}
-                    onChange={(event) => setCommentDraft(event.target.value)}
-                    placeholder="Write a comment..."
-                  />
-                  <button type="submit" aria-label="Post comment" disabled={!commentDraft.trim()}>
-                    <Send size={13} />
-                  </button>
-                </form>
-              )}
             </div>
           </article>
         ))}
