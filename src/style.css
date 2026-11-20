@@ -254,7 +254,7 @@ h1 {
   padding: 0;
   place-items: initial;
 }
-.storefront { width: 100%; padding: 8px 16px 28px; color: #1d1d1f; }
+.storefront { width: 100%; padding: 0 16px 28px; color: #1d1d1f; }
 .storefront-topline { display:flex; align-items:center; justify-content:space-between; padding: 8px 2px 18px; }
 .storefront-kicker { display:block; color:#86868b; font-size:10px; font-weight:700; letter-spacing:.16em; }
 .storefront-location { margin:4px 0 0; color:#86868b; font-size:12px; }
