@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "konsta/react/theme.css";
 
 :root {
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -271,13 +270,12 @@ h1 {
 .storefront-section-heading { display:flex; align-items:end; justify-content:space-between; margin:28px 2px 12px; }
 .storefront-section-heading h2 { margin:5px 0 0; font-size:25px; letter-spacing:-.045em; }
 .storefront-count { padding-bottom:4px; color:#86868b; font-size:11px; }
-.storefront-search .k-searchbar { padding:0; }
-.storefront-search .k-searchbar input { border-radius:12px; }
+.storefront-search-input { display:block; width:100%; height:42px; padding:0 14px; border:1px solid #d2d2d7; border-radius:12px; background:#f5f5f7; color:#1d1d1f; font:inherit; font-size:13px; outline:none; }
+.storefront-search-input:focus { border-color:#06c; background:#fff; }
 .storefront-categories { display:flex; gap:8px; overflow-x:auto; padding:10px 0 16px; scrollbar-width:none; }
 .storefront-categories::-webkit-scrollbar { display:none; }
-.storefront-categories .k-chip { flex:0 0 auto; margin:0; }
-.storefront-chip-active { background:#1d1d1f!important; color:#fff!important; border-color:#1d1d1f!important; }
-.storefront-chip { background:#fff!important; }
+.storefront-category-chip { flex:0 0 auto; margin:0; padding:7px 13px; border:1px solid #d2d2d7; border-radius:999px; background:#fff; color:#1d1d1f; font:inherit; font-size:12px; cursor:pointer; }
+.storefront-category-chip.is-active { border-color:#1d1d1f; background:#1d1d1f; color:#fff; }
 .storefront-products { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
 .storefront-product-card { min-width:0; margin:0; padding:0 !important; overflow:hidden; border:1px solid #eeeef0; border-radius:17px; box-shadow:none; }
 .storefront-product-image-wrap { position:relative; display:grid; height:142px; place-items:center; overflow:hidden; background:#f5f5f7; }
@@ -293,6 +291,7 @@ h1 {
 .storefront-empty > span { color:#86868b; font-size:32px; }
 .storefront-empty h3 { margin:8px 0 4px; font-size:16px; }
 .storefront-empty p { color:#86868b; font-size:12px; }
+.storefront-clear-filters { padding:8px 12px; border:0; background:transparent; color:#06c; font:inherit; font-size:12px; cursor:pointer; }
 .storefront-visit { margin-top:28px; padding:24px 20px; border-radius:20px; background:#f5f5f7; }
 .storefront-visit h2 { margin:9px 0; font-size:25px; line-height:1.08; letter-spacing:-.05em; }
 .storefront-visit p { max-width:270px; margin:0 0 15px; color:#6e6e73; font-size:12px; line-height:1.55; }
