@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { Heart, MessageCircle, Send } from 'lucide-react'
 
 const categories = ['All', 'iPhone', 'iPad', 'Mac', 'Watch', 'Audio']
 
@@ -14,6 +15,10 @@ const products = [
 export default function Storefront() {
   const [category, setCategory] = useState('All')
   const [search, setSearch] = useState('')
+  const [likedProducts, setLikedProducts] = useState<string[]>([])
+  const [commentCounts, setCommentCounts] = useState<Record<string, number>>({})
+  const [commentingProduct, setCommentingProduct] = useState<string | null>(null)
+  const [commentDraft, setCommentDraft] = useState('')
 
   const visibleProducts = useMemo(() => products.filter((product) => {
     const matchesCategory = category === 'All' || product.category === category
@@ -89,6 +94,55 @@ export default function Storefront() {
               <div className="storefront-product-footer">
                 <strong>{product.price}</strong>
               </div>
+              <div className="storefront-product-social">
+                <button
+                  className={`storefront-social-action${likedProducts.includes(product.id) ? ' is-liked' : ''}`}
+                  type="button"
+                  aria-label={likedProducts.includes(product.id) ? `Unlike ${product.name}` : `Like ${product.name}`}
+                  aria-pressed={likedProducts.includes(product.id)}
+                  onClick={() => setLikedProducts((current) => current.includes(product.id)
+                    ? current.filter((id) => id !== product.id)
+                    : [...current, product.id])}
+                >
+                  <Heart size={14} strokeWidth={1.8} fill={likedProducts.includes(product.id) ? 'currentColor' : 'none'} />
+                  <span>{likedProducts.includes(product.id) ? 'Liked' : 'Like'}</span>
+                </button>
+                <button
+                  className="storefront-social-action"
+                  type="button"
+                  aria-label={`Comment on ${product.name}`}
+                  aria-expanded={commentingProduct === product.id}
+                  onClick={() => {
+                    setCommentingProduct((current) => current === product.id ? null : product.id)
+                    setCommentDraft('')
+                  }}
+                >
+                  <MessageCircle size={14} strokeWidth={1.8} />
+                  <span>Comment{commentCounts[product.id] ? ` · ${commentCounts[product.id]}` : ''}</span>
+                </button>
+              </div>
+              {commentingProduct === product.id && (
+                <form
+                  className="storefront-comment-form"
+                  onSubmit={(event) => {
+                    event.preventDefault()
+                    if (!commentDraft.trim()) return
+                    setCommentCounts((current) => ({ ...current, [product.id]: (current[product.id] ?? 0) + 1 }))
+                    setCommentDraft('')
+                    setCommentingProduct(null)
+                  }}
+                >
+                  <input
+                    aria-label={`Write a comment on ${product.name}`}
+                    value={commentDraft}
+                    onChange={(event) => setCommentDraft(event.target.value)}
+                    placeholder="Write a comment..."
+                  />
+                  <button type="submit" aria-label="Post comment" disabled={!commentDraft.trim()}>
+                    <Send size={13} />
+                  </button>
+                </form>
+              )}
             </div>
           </article>
         ))}
