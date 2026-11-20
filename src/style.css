@@ -40,7 +40,6 @@ body {
   height: 100%;
   flex-direction: column;
   width: 100%;
-  padding: 24px;
   background:
     radial-gradient(ellipse at 50% 38%, rgba(75, 75, 85, .32), transparent 55%),
     #000;
