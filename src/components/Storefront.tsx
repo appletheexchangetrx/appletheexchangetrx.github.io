@@ -26,13 +26,6 @@ export default function Storefront() {
 
   return (
     <div className="storefront">
-      <div className="storefront-topline">
-        <div>
-          <span className="storefront-kicker">APPLE THE EXCHANGE TRX</span>
-          <p className="storefront-location">Kuala Lumpur, Malaysia</p>
-        </div>
-      </div>
-
       <section className="storefront-hero">
         <div className="storefront-hero-copy">
           <span>THE LATEST FROM APPLE</span>
