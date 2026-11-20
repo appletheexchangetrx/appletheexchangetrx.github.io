@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { App as KonstaApp } from 'konsta/react'
 import './style.css'
 
 // Disable page zoom gestures and browser zoom shortcuts while this app is active.
