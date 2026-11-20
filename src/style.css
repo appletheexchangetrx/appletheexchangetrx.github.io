@@ -24,7 +24,6 @@ body {
   background: #000;
 }
 
-/* Mobile-first application frame, centered on larger screens. */
 #root {
   width: 100%;
   max-width: 500px;
@@ -33,37 +32,49 @@ body {
   background: #000;
 }
 
-.page {
-  display: grid;
+.app-shell {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  place-items: center;
   padding: 24px;
   background:
     radial-gradient(ellipse at 50% 38%, rgba(75, 75, 85, .32), transparent 55%),
     #000;
 }
 
-.content {
+.app-header {
   width: 100%;
-  max-width: 100%;
   text-align: center;
 }
 
-.eyebrow {
+.app-eyebrow {
   color: #a1a1a6;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: .18em;
 }
 
+.app-main {
+  display: grid;
+  width: 100%;
+  place-items: center;
+  padding-block: 56px;
+}
+
+.welcome-content {
+  width: 100%;
+  text-align: center;
+}
+
 h1 {
-  margin: 24px 0 16px;
+  margin: 0 0 16px;
   font-size: clamp(36px, 10vw, 48px);
   line-height: 1.04;
   letter-spacing: -.055em;
 }
 
-.description {
+.description,
+.standalone-description {
   color: #a1a1a6;
   font-size: 17px;
   line-height: 1.6;
@@ -79,7 +90,82 @@ h1 {
   font-size: 13px;
 }
 
-/* Keep the app at phone width on desktop; never expand beyond 500px. */
+.splash-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 72px 24px;
+  background: #000;
+}
+
+.splash-mark {
+  display: grid;
+  width: 56px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid #555;
+  border-radius: 18px;
+  color: #f5f5f7;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.splash-label {
+  margin: 18px 0 0;
+  color: #a1a1a6;
+  font-size: 13px;
+  letter-spacing: .04em;
+}
+
+.standalone-page {
+  width: 100%;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.standalone-code {
+  margin: 0 0 12px;
+  color: #a1a1a6;
+  font-size: 14px;
+  letter-spacing: .2em;
+}
+
+.standalone-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: #f5f5f7;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.overlay-root {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 72%);
+}
+
+.overlay-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  padding: 24px;
+  border: 1px solid #38383d;
+  border-radius: 20px;
+  background: #171719;
+}
+
 @media (min-width: 501px) {
   #root {
     width: 500px;
