@@ -291,12 +291,8 @@ h1 {
 .storefront-social-action { display:inline-flex; align-items:center; gap:4px; padding:3px 0; border:0; background:transparent; color:#6e6e73; font:inherit; font-size:10px; cursor:pointer; }
 .storefront-social-action svg { flex:0 0 auto; }
 .storefront-social-action.is-liked { color:#e0245e; }
-.storefront-social-action:focus-visible,.storefront-comment-form button:focus-visible { outline:2px solid #06c; outline-offset:3px; border-radius:4px; }
-.storefront-comment-form { display:flex; align-items:center; gap:5px; margin-top:7px; }
-.storefront-comment-form input { min-width:0; flex:1; height:28px; padding:0 8px; border:1px solid #d2d2d7; border-radius:7px; background:#f5f5f7; color:#1d1d1f; font:inherit; font-size:10px; outline:none; }
-.storefront-comment-form input:focus { border-color:#06c; background:#fff; }
-.storefront-comment-form button { display:grid; width:28px; height:28px; flex:0 0 auto; place-items:center; border:0; border-radius:7px; background:#1d1d1f; color:#fff; cursor:pointer; }
-.storefront-comment-form button:disabled { opacity:.35; cursor:default; }
+.storefront-social-action:focus-visible { outline:2px solid #06c; outline-offset:3px; border-radius:4px; }
+.storefront-like-count { color:inherit; font-variant-numeric:tabular-nums; }
 .storefront-empty { grid-column:1/-1; padding:36px 12px; text-align:center; }
 .storefront-empty > span { color:#86868b; font-size:32px; }
 .storefront-empty h3 { margin:8px 0 4px; font-size:16px; }
