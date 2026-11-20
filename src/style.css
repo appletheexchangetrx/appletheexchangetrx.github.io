@@ -22,7 +22,7 @@ body,
 
 body {
   min-width: 0;
-  background: #000;
+  background: #fff;
 }
 
 #root {
@@ -32,7 +32,7 @@ body {
   max-width: 500px;
   margin-inline: auto;
   overflow-x: clip;
-  background: #000;
+  background: #fff;
 }
 
 .app-shell {
