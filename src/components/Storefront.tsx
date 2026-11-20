@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Button, Card, Chip, Searchbar } from 'konsta/react'
+import { useStorefrontCart } from './AppShell'
 
 const categories = ['All', 'iPhone', 'iPad', 'Mac', 'Watch', 'Audio']
 
@@ -15,7 +16,7 @@ const products = [
 export default function Storefront() {
   const [category, setCategory] = useState('All')
   const [search, setSearch] = useState('')
-  const [bagCount, setBagCount] = useState(0)
+  const { addToBag } = useStorefrontCart()
 
   const visibleProducts = useMemo(() => products.filter((product) => {
     const matchesCategory = category === 'All' || product.category === category
@@ -30,9 +31,6 @@ export default function Storefront() {
           <span className="storefront-kicker">APPLE THE EXCHANGE TRX</span>
           <p className="storefront-location">Kuala Lumpur, Malaysia</p>
         </div>
-        <button className="storefront-bag" type="button" aria-label={`Shopping bag, ${bagCount} items`}>
-          <span aria-hidden="true">⌑</span><b>{bagCount}</b>
-        </button>
       </div>
 
       <section className="storefront-hero">
@@ -90,7 +88,7 @@ export default function Storefront() {
               <p>{product.detail}</p>
               <div className="storefront-product-footer">
                 <strong>{product.price}</strong>
-                <Button small rounded onClick={() => setBagCount((count) => count + 1)}>Add</Button>
+                <Button small rounded onClick={addToBag}>Add</Button>
               </div>
             </div>
           </Card>
