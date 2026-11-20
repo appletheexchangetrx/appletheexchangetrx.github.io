@@ -5,7 +5,7 @@ type SplashScreenProps = {
 export default function SplashScreen({ label = 'Apple The Exchange TRX' }: SplashScreenProps) {
   return (
     <div className="splash-screen" role="status" aria-label="Loading application">
-      <div className="splash-mark" aria-hidden="true">A</div>
+      <img className="splash-logo" src="/logo.png" alt="Apple The Exchange TRX" />
       <p className="splash-label">{label}</p>
     </div>
   )
