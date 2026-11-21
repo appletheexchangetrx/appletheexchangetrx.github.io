@@ -89,6 +89,8 @@ export default function CheckoutPage() {
     setSubmitting(true)
     setSubmitError(null)
     try {
+      const requiredValues = [form.customerName, form.phone, form.address, form.city, form.state, form.postcode, form.country]
+      if (requiredValues.some((value) => !value.trim())) throw new Error('Complete all required contact and shipping fields.')
       const latestProducts = await refresh()
       const orderItems: OrderItem[] = items.map((item) => {
         const product = latestProducts.find((candidate) => candidate.item_group_id === item.item_group_id)
@@ -96,7 +98,9 @@ export default function CheckoutPage() {
         const stock = product?.quantity_to_sell_on_facebook
         const unitPrice = variant?.sale_price ?? variant?.price
         if (!product || !variant || stock == null || stock <= 0 || item.quantity > stock ||
-          !Number.isFinite(unitPrice) || (unitPrice as number) < 0) {
+          !Number.isFinite(unitPrice) || (unitPrice as number) < 0 ||
+          (variant.price != null && (!Number.isFinite(variant.price) || variant.price < 0)) ||
+          (variant.sale_price != null && (!Number.isFinite(variant.sale_price) || variant.sale_price < 0))) {
           throw new Error('A product price or stock changed. Return to Cart and review your items.')
         }
         return {
@@ -108,7 +112,7 @@ export default function CheckoutPage() {
           color: variant.color,
           size: variant.size,
           image_link: variant.image_link,
-          price: variant.price as number,
+          price: variant.price ?? (unitPrice as number),
           sale_price: variant.sale_price,
           quantity: item.quantity,
         }
