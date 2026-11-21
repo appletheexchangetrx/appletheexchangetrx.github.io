@@ -49,7 +49,7 @@ function isOrder(value: unknown): value is Order {
     Array.isArray(order.items) && order.items.length > 0 && order.items.every(isOrderItem) &&
     isFiniteNumber(order.subtotal) && order.subtotal >= 0 &&
     isFiniteNumber(order.shipping_fee) && order.shipping_fee >= 0 &&
-    isFiniteNumber(order.total) && order.total >= 0 &&
+    isFiniteNumber(order.total) && order.total >= 0 && order.total === order.subtotal + order.shipping_fee &&
     order.payment_method === null &&
     order.payment_status === 'pending' &&
     order.order_status === 'pending' &&
