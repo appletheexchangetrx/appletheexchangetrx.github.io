@@ -18,10 +18,13 @@ export default function ProductDetailPage({ productId }: { productId?: string })
   const selectedVariant = useMemo(() => product?.variants.find((variant) => variant.id === selectedVariantId) ?? product?.defaultVariant ?? null, [product, selectedVariantId])
   const images = useMemo(() => selectedVariant ? [selectedVariant.image_link, ...(selectedVariant.additional_image_link ?? [])].filter((value): value is string => Boolean(value)) : [], [selectedVariant])
   const price = selectedVariant?.sale_price ?? selectedVariant?.price
+  const availableStock = product?.quantity_to_sell_on_facebook ?? null
+  const stockLimitReached = availableStock != null && quantity >= availableStock
+  const outOfStock = availableStock != null && availableStock <= 0
   const bottomAction = useMemo(() => product && selectedVariant
     ? <div className="product-bottom-content">
         <div><span>{product.title}</span><strong>{formatPrice(price)}</strong></div>
-        <button type="button" className="product-add-button" onClick={() => setSheetOpen(true)}>Add to Cart</button>
+        <button type="button" className="product-add-button" disabled={outOfStock} onClick={() => { setQuantity(1); setSheetOpen(true) }}>Add to Cart</button>
       </div>
     : null, [product, selectedVariant, price])
   useStandaloneBottomAction(bottomAction)
@@ -39,7 +42,7 @@ export default function ProductDetailPage({ productId }: { productId?: string })
     if (next) { setSelectedVariantId(next.id); setActiveImage(0) }
   }
   const confirmAdd = () => {
-    if (!product || !selectedVariant) return
+    if (!product || !selectedVariant || outOfStock) return
     addToCart(product, selectedVariant, quantity)
     setSheetOpen(false)
     window.location.hash = '#/cart'
@@ -79,10 +82,10 @@ export default function ProductDetailPage({ productId }: { productId?: string })
         <div className="variant-sheet-summary"><strong>{product.title}</strong><span>{formatPrice(price)}</span><small>{[selectedVariant.color, selectedVariant.size].filter(Boolean).join(' · ')}</small></div>
         {colors.length > 0 && <div className="product-variant-group"><strong>Color</strong><div className="product-color-options">{colors.map((color) => <button type="button" key={color} className={selectedVariant.color === color ? 'is-selected' : ''} onClick={() => { chooseColor(color); setActiveImage(0) }}>{color}</button>)}</div></div>}
         {Array.from(new Set(product.variants.filter((variant) => !selectedVariant.color || variant.color === selectedVariant.color).map((variant) => variant.size).filter((value): value is string => Boolean(value)))).length > 0 && <div className="product-variant-group"><strong>Size</strong><div className="product-size-options">{Array.from(new Set(product.variants.filter((variant) => !selectedVariant.color || variant.color === selectedVariant.color).map((variant) => variant.size).filter((value): value is string => Boolean(value)))).map((size) => <button type="button" key={size} className={selectedVariant.size === size ? 'is-selected' : ''} onClick={() => chooseSize(size)}>{size}</button>)}</div></div>}
-        <div className="variant-sheet-quantity"><span>Quantity</span><div className="cart-quantity"><button type="button" disabled={quantity <= 1} onClick={() => setQuantity((value) => Math.max(1, value - 1))}>−</button><span>{quantity}</span><button type="button" onClick={() => setQuantity((value) => value + 1)}>+</button></div></div>
+        <div className="variant-sheet-quantity"><span>Quantity{availableStock != null ? ` · ${availableStock} available` : ''}</span><div className="cart-quantity"><button type="button" disabled={quantity <= 1} onClick={() => setQuantity((value) => Math.max(1, value - 1))}>−</button><span>{quantity}</span><button type="button" disabled={stockLimitReached || outOfStock} onClick={() => setQuantity((value) => availableStock == null ? value + 1 : Math.min(availableStock, value + 1))}>+</button></div></div>
         </div>
         <div className="variant-action">
-          <button type="button" className="product-add-button" onClick={confirmAdd}>Confirm Add to Cart</button>
+          <button type="button" className="product-add-button" disabled={outOfStock} onClick={confirmAdd}>{outOfStock ? 'Out of Stock' : 'Confirm Add to Cart'}</button>
         </div>
       </section>
     </div>}
