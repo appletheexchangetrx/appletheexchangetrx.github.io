@@ -1,10 +1,15 @@
+import { useMemo } from 'react'
+import { useStandaloneBottomAction } from './StandaloneBottomActionContext'
+
 export default function OrderDetailPage({ orderId }: { orderId?: string }) {
+  const bottomAction = useMemo(() => <a className="standalone-bottom-action-link" href="#/orders">Back to My Orders</a>, [])
+  useStandaloneBottomAction(bottomAction)
+
   if (!orderId) {
     return (
       <section className="standalone-state">
         <h2>Order not found</h2>
         <p>Choose an order from your order history to view its details.</p>
-        <a className="standalone-outline-action" href="#/orders">View my orders</a>
       </section>
     )
   }
@@ -16,7 +21,6 @@ export default function OrderDetailPage({ orderId }: { orderId?: string }) {
         <h2>{orderId}</h2>
         <p>Order information will appear here when order data is connected.</p>
       </div>
-      <a className="standalone-text-action" href="#/orders">Back to my orders</a>
     </section>
   )
 }
