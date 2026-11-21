@@ -27,12 +27,8 @@ export default function StandalonePages({ route, routeId, onBack }: StandalonePa
     }
   })()
 
-  const bottomAction = route === 'checkout'
-    ? <button className="standalone-primary-action" type="button" disabled>Continue to payment</button>
-    : undefined
-
   return (
-    <StandaloneLayout title={page.title} onBack={onBack} bottomAction={bottomAction}>
+    <StandaloneLayout title={page.title} onBack={onBack}>
       {page.content}
     </StandaloneLayout>
   )
