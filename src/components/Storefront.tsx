@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Heart } from 'lucide-react'
 
 const categories = ['All', 'iPhone', 'iPad', 'Mac', 'Watch', 'Audio']
@@ -19,6 +19,25 @@ export default function Storefront() {
   const [likeCounts, setLikeCounts] = useState<Record<string, number>>({})
   const [activeHero, setActiveHero] = useState(0)
   const heroSliderRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      if (document.visibilityState !== 'visible') return
+
+      const slider = heroSliderRef.current
+      if (!slider || slider.clientWidth === 0) return
+
+      const currentIndex = Math.round(slider.scrollLeft / slider.clientWidth)
+      const nextIndex = (currentIndex + 1) % 3
+      slider.scrollTo({
+        left: slider.clientWidth * nextIndex,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      })
+      setActiveHero(nextIndex)
+    }, 4000)
+
+    return () => window.clearInterval(interval)
+  }, [])
 
   const visibleProducts = useMemo(() => products.filter((product) => {
     const matchesCategory = category === 'All' || product.category === category
