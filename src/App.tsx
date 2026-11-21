@@ -13,7 +13,7 @@ type RouteState = { name: string; id?: string }
 function getCurrentRoute(): RouteState {
   const segments = window.location.hash.replace(/^#\/?/, '').split('?')[0].split('/').filter(Boolean)
   const [name = 'home', id] = segments
-  const supported = ['home', 'products', 'profile', 'cart', 'notification', 'livechat', 'product', 'checkout', 'orders', 'order']
+  const supported = ['home', 'products', 'profile', 'cart', 'notification', 'livechat', 'product', 'checkout', 'orders', 'order', 'order-confirmation']
   return supported.includes(name) ? { name, id: id ? decodeURIComponent(id) : undefined } : { name: 'home' }
 }
 function AppContent() {
