@@ -8,17 +8,21 @@ import ProductsPage from './components/pages/ProductsPage'
 import ProfilePage from './components/pages/ProfilePage'
 import { ProductsProvider } from './context/ProductsContext'
 
-type AppRoute = 'home' | 'products' | 'profile' | 'cart' | 'notification' | 'livechat'
-
-function getCurrentRoute(): AppRoute {
-  const route = window.location.hash.replace(/^#\/?/, '').split('?')[0]
-  const validRoutes: AppRoute[] = ['home', 'products', 'profile', 'cart', 'notification', 'livechat']
-  return validRoutes.includes(route as AppRoute) ? (route as AppRoute) : 'home'
+type RouteState = {
+  name: string
+  id?: string
 }
 
-function App() {
+function getCurrentRoute(): RouteState {
+  const segments = window.location.hash.replace(/^#\/?/, '').split('?')[0].split('/').filter(Boolean)
+  const [name = 'home', id] = segments
+  const supported = ['home', 'products', 'profile', 'cart', 'notification', 'livechat', 'product', 'checkout', 'orders', 'order']
+  return supported.includes(name) ? { name, id: id ? decodeURIComponent(id) : undefined } : { name: 'home' }
+}
+
+function AppContent() {
   const [isSplashVisible, setIsSplashVisible] = useState(true)
-  const [route, setRoute] = useState<AppRoute>(getCurrentRoute)
+  const [route, setRoute] = useState<RouteState>(getCurrentRoute)
   const [hasInternalHistory, setHasInternalHistory] = useState(false)
 
   useEffect(() => {
@@ -27,7 +31,6 @@ function App() {
       setRoute(getCurrentRoute())
       setHasInternalHistory(true)
     }
-
     window.addEventListener('hashchange', handleNavigation)
     return () => {
       window.clearTimeout(splashTimer)
@@ -38,29 +41,35 @@ function App() {
   if (isSplashVisible) return <SplashScreen />
 
   const handleBack = () => {
-    if (hasInternalHistory) {
-      window.history.back()
-    } else {
-      window.location.hash = '#/home'
-    }
+    if (hasInternalHistory) window.history.back()
+    else window.location.hash = '#/home'
   }
 
-  const page = {
+  const appPages = {
     home: <HomePage />,
     products: <ProductsPage />,
     profile: <ProfilePage />,
-  }[route]
+  }
+  const isAppPage = route.name === 'home' || route.name === 'products' || route.name === 'profile'
 
-  if (route === 'cart' || route === 'notification' || route === 'livechat') {
-    return <StandalonePages route={route} onBack={handleBack} />
+  if (isAppPage) {
+    return (
+      <>
+        <AppShell activePage={route.name as 'home' | 'products' | 'profile'}>
+          {appPages[route.name as keyof typeof appPages]}
+        </AppShell>
+        <Overlay />
+      </>
+    )
   }
 
+  return <StandalonePages route={route.name} routeId={route.id} onBack={handleBack} />
+}
+
+export default function App() {
   return (
     <ProductsProvider>
-      <AppShell activePage={route}>{page}</AppShell>
-      <Overlay />
+      <AppContent />
     </ProductsProvider>
   )
 }
-
-export default App
