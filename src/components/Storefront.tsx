@@ -94,7 +94,7 @@ export default function Storefront() {
         <p>Visit us for personal recommendations and a closer look at your next device.</p>
         <a href="https://www.theexchange.my/" target="_blank" rel="noreferrer">Discover The Exchange TRX ↗</a>
       </section>
-      <p className="storefront-disclaimer">Product selection and prices shown are for demonstration purposes.</p>
+      <p className="storefront-disclaimer">Product availability and prices may change.</p>
     </div>
   )
 }
