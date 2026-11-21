@@ -80,7 +80,6 @@ export default function ProductDetailPage({ productId }: { productId?: string })
         {Array.from(new Set(product.variants.filter((variant) => !selectedVariant.color || variant.color === selectedVariant.color).map((variant) => variant.size).filter((value): value is string => Boolean(value)))).length > 0 && <div className="product-variant-group"><strong>Size</strong><div className="product-size-options">{Array.from(new Set(product.variants.filter((variant) => !selectedVariant.color || variant.color === selectedVariant.color).map((variant) => variant.size).filter((value): value is string => Boolean(value)))).map((size) => <button type="button" key={size} className={selectedVariant.size === size ? 'is-selected' : ''} onClick={() => chooseSize(size)}>{size}</button>)}</div></div>}
         <div className="variant-sheet-quantity"><span>Quantity</span><div className="cart-quantity"><button type="button" disabled={quantity <= 1} onClick={() => setQuantity((value) => Math.max(1, value - 1))}>−</button><span>{quantity}</span><button type="button" onClick={() => setQuantity((value) => value + 1)}>+</button></div></div>
         <button type="button" className="product-add-button" onClick={confirmAdd}>Confirm Add to Cart</button>
-        <button type="button" className="variant-sheet-cancel" onClick={() => setSheetOpen(false)}>Cancel</button>
       </section>
     </div>}
   </article>
