@@ -665,12 +665,12 @@ h1 {
 }
 .variant-bottom-sheet .variant-action {
   display:flex;
-  flex:0 0 64px;
+  flex:0 0 58px;
   align-items:center;
   width:100%;
-  height:64px;
+  height:58px;
   margin:0;
-  padding:0;
+  padding:8px;
 }
 .variant-bottom-sheet .variant-action .product-add-button {
   box-sizing:border-box;
