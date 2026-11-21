@@ -321,12 +321,6 @@ h1 {
 .storefront-product-info p { min-height:24px; margin:0; color:#86868b; font-size:10px; line-height:1.4; }
 .storefront-product-footer { display:flex; align-items:center; justify-content:flex-start; margin-top:3px; }
 .storefront-product-footer strong { color:#1d1d1f; font-size:11px; font-weight:700; line-height:1.25; }
-.storefront-product-social { display:flex; align-items:center; gap:14px; margin-top:1px; padding-top:5px; border-top:1px solid #f0f0f2; }
-.storefront-social-action { display:inline-flex; align-items:center; gap:5px; padding:3px 0; border:0; background:transparent; color:#6e6e73; font:inherit; font-size:10px; cursor:pointer; }
-.storefront-social-action svg { flex:0 0 auto; }
-.storefront-social-action.is-liked { color:#e0245e; }
-.storefront-social-action:focus-visible { outline:2px solid #06c; outline-offset:3px; border-radius:4px; }
-.storefront-like-count { color:inherit; font-variant-numeric:tabular-nums; }
 .storefront-empty { grid-column:1/-1; padding:36px 12px; text-align:center; }
 .storefront-empty > span { color:#86868b; font-size:32px; }
 .storefront-empty h3 { margin:8px 0 4px; font-size:16px; }
