@@ -40,7 +40,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const updateQuantity = useCallback((groupId: string, variantId: string, quantity: number) => {
     if (quantity < 1) return
     setItems((current) => current.map((item) =>
-      item.item_group_id === groupId && item.variant_id === variantId ? { ...item, quantity } : item))
+      item.item_group_id === groupId && item.variant_id === variantId ? { ...item, quantity, status: item.status === 'stock_exceeded' && item.quantity_to_sell_on_facebook != null && quantity <= item.quantity_to_sell_on_facebook ? 'available' : item.status } : item))
   }, [])
   const removeItem = useCallback((groupId: string, variantId: string) => {
     setItems((current) => current.filter((item) => !(item.item_group_id === groupId && item.variant_id === variantId)))
