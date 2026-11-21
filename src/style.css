@@ -315,7 +315,7 @@ h1 {
   font-weight:700;
   backdrop-filter:blur(8px);
 }
-.storefront-product-info { display:flex; flex-direction:column; gap:5px; padding:9px 0 8px; }
+.storefront-product-info { display:flex; flex-direction:column; gap:0; padding:0; }
 .storefront-product-category { color:#86868b; font-size:9px; font-weight:700; letter-spacing:.11em; text-transform:uppercase; }
 .storefront-product-info h3 { margin:0; color:#1d1d1f; font-size:14px; font-weight:650; line-height:1.2; letter-spacing:-.035em; }
 .storefront-product-info p { min-height:24px; margin:0; color:#86868b; font-size:10px; line-height:1.4; }
