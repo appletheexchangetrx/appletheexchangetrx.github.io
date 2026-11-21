@@ -51,16 +51,14 @@ function App() {
     profile: <ProfilePage />,
   }[route]
 
+  if (route === 'cart' || route === 'notification' || route === 'livechat') {
+    return <StandalonePages route={route} onBack={handleBack} />
+  }
+
   return (
     <ProductsProvider>
-      {route === 'cart' || route === 'notification' || route === 'livechat' ? (
-        <StandalonePages route={route} onBack={handleBack} />
-      ) : (
-        <>
-          <AppShell activePage={route}>{page}</AppShell>
-          <Overlay />
-        </>
-      )}
+      <AppShell activePage={route}>{page}</AppShell>
+      <Overlay />
     </ProductsProvider>
   )
 }
