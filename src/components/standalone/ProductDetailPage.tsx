@@ -70,6 +70,11 @@ export default function ProductDetailPage({ productId }: { productId?: string })
     {sheetOpen && selectedVariant && <div className="cart-dialog-backdrop" role="presentation" onClick={() => setSheetOpen(false)}>
       <section className="variant-bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="variant-sheet-title" onClick={(event) => event.stopPropagation()}>
         <div className="variant-sheet-handle" /><h2 id="variant-sheet-title">Choose your variant</h2>
+        <div className="variant-sheet-image">
+          {selectedVariant.image_link
+            ? <img src={selectedVariant.image_link} alt={`${product.title}${selectedVariant.color ? ` - ${selectedVariant.color}` : ''}`} />
+            : <span aria-hidden="true">◎</span>}
+        </div>
         <div className="variant-sheet-summary"><strong>{product.title}</strong><span>{formatPrice(price)}</span><small>{[selectedVariant.color, selectedVariant.size].filter(Boolean).join(' · ')}</small></div>
         {colors.length > 0 && <div className="product-variant-group"><strong>Color</strong><div className="product-color-options">{colors.map((color) => <button type="button" key={color} className={selectedVariant.color === color ? 'is-selected' : ''} onClick={() => { chooseColor(color); setActiveImage(0) }}>{color}</button>)}</div></div>}
         {Array.from(new Set(product.variants.filter((variant) => !selectedVariant.color || variant.color === selectedVariant.color).map((variant) => variant.size).filter((value): value is string => Boolean(value)))).length > 0 && <div className="product-variant-group"><strong>Size</strong><div className="product-size-options">{Array.from(new Set(product.variants.filter((variant) => !selectedVariant.color || variant.color === selectedVariant.color).map((variant) => variant.size).filter((value): value is string => Boolean(value)))).map((size) => <button type="button" key={size} className={selectedVariant.size === size ? 'is-selected' : ''} onClick={() => chooseSize(size)}>{size}</button>)}</div></div>}
