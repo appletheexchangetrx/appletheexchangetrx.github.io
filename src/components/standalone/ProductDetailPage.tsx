@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useProducts } from '../../context/ProductsContext'
 import { useCart } from '../../context/CartContext'
+import { useStandaloneBottomAction } from './StandaloneBottomActionContext'
 
 function formatPrice(value: number | null | undefined) {
   if (typeof value !== 'number' || !Number.isFinite(value)) return 'Price unavailable'
@@ -17,6 +18,13 @@ export default function ProductDetailPage({ productId }: { productId?: string })
   const selectedVariant = useMemo(() => product?.variants.find((variant) => variant.id === selectedVariantId) ?? product?.defaultVariant ?? null, [product, selectedVariantId])
   const images = useMemo(() => selectedVariant ? [selectedVariant.image_link, ...(selectedVariant.additional_image_link ?? [])].filter((value): value is string => Boolean(value)) : [], [selectedVariant])
   const price = selectedVariant?.sale_price ?? selectedVariant?.price
+  const bottomAction = useMemo(() => product && selectedVariant
+    ? <div className="product-bottom-content">
+        <div><span>{product.title}</span><strong>{formatPrice(price)}</strong></div>
+        <button type="button" className="product-add-button" onClick={() => setSheetOpen(true)}>Add to Cart</button>
+      </div>
+    : null, [product, selectedVariant, price])
+  useStandaloneBottomAction(bottomAction)
   const colors = Array.from(new Set(product?.variants.map((variant) => variant.color).filter((value): value is string => Boolean(value)) ?? []))
   const sizes = Array.from(new Set(product?.variants.filter((variant) => !selectedVariant?.color || variant.color === selectedVariant.color).map((variant) => variant.size).filter((value): value is string => Boolean(value)) ?? []))
 
@@ -58,7 +66,6 @@ export default function ProductDetailPage({ productId }: { productId?: string })
       {sizes.length > 0 && <div className="product-variant-group"><strong>Size</strong><div className="product-size-options">{sizes.map((size) => <button type="button" key={size} className={selectedVariant?.size === size ? 'is-selected' : ''} onClick={() => chooseSize(size)}>{size}</button>)}</div></div>}
       {product.availability && <p className="product-detail-availability">Availability: {product.availability}</p>}
       {product.description && <section className="product-detail-description"><h3>Product description</h3><p>{product.description}</p></section>}
-      <button type="button" className="product-add-button" onClick={() => setSheetOpen(true)} disabled={!selectedVariant}>Add to Cart</button>
     </div>
     {sheetOpen && selectedVariant && <div className="cart-dialog-backdrop" role="presentation" onClick={() => setSheetOpen(false)}>
       <section className="variant-bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="variant-sheet-title" onClick={(event) => event.stopPropagation()}>
