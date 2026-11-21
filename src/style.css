@@ -300,3 +300,69 @@ h1 {
 .storefront-visit h2 { margin:9px 0; font-size:25px; line-height:1.08; letter-spacing:-.05em; }
 .storefront-visit p { max-width:270px; margin:0 0 15px; color:#6e6e73; font-size:12px; line-height:1.55; }
 .storefront-disclaimer { margin:16px 2px 0; color:#a1a1a6; font-size:9px; text-align:center; }
+
+
+/* Swipeable mobile hero carousel */
+.storefront-hero-slider { width:100%; }
+.storefront-hero-track {
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.storefront-hero-track::-webkit-scrollbar { display:none; }
+.storefront-hero-slide {
+  flex:0 0 100%;
+  min-width:100%;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+}
+.storefront-hero-slide-two { background:linear-gradient(135deg,#e9eef5 0%,#d8e1ed 100%); }
+.storefront-hero-slide-three { background:linear-gradient(135deg,#f5eee9 0%,#eadbd2 100%); }
+.storefront-hero-art {
+  position:absolute;
+  z-index:0;
+  right:-28px;
+  top:50%;
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  transform:translateY(-50%);
+}
+.storefront-hero-art-laptop { background:linear-gradient(145deg,#fff,#c8d2df); box-shadow:inset -12px -14px 30px #9daabd; }
+.storefront-hero-art-laptop span {
+  position:absolute;
+  top:62px;
+  left:12px;
+  width:145px;
+  height:94px;
+  border:5px solid #555d68;
+  border-bottom-width:9px;
+  border-radius:9px;
+  background:linear-gradient(135deg,#b7cce5,#eef3fa);
+  transform:rotate(-12deg);
+  box-shadow:0 16px 24px #0003;
+}
+.storefront-hero-art-watch { background:linear-gradient(145deg,#fff,#e2c9bb); box-shadow:inset -12px -14px 30px #c7a99a; }
+.storefront-hero-art-watch span {
+  position:absolute;
+  top:32px;
+  left:68px;
+  width:58px;
+  height:126px;
+  border:8px solid #37302d;
+  border-radius:21px;
+  background:linear-gradient(145deg,#d8b6a4,#8d6e60);
+  box-shadow:0 16px 24px #0003;
+  transform:rotate(14deg);
+}
+.storefront-hero-pagination { display:flex; justify-content:center; align-items:center; gap:7px; padding:10px 0 0; }
+.storefront-hero-dot { width:6px; height:6px; padding:0; border:0; border-radius:999px; background:#d2d2d7; cursor:pointer; transition:width .2s ease,background .2s ease; }
+.storefront-hero-dot.is-active { width:19px; background:#1d1d1f; }
+@media (prefers-reduced-motion: reduce) {
+  .storefront-hero-track { scroll-behavior:auto; }
+  .storefront-hero-dot { transition:none; }
+}
