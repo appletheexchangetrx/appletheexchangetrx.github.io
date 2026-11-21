@@ -31,7 +31,7 @@ export default function CartPage() {
       setVerifying(false)
     }
   }
-  useEffect(() => { if (!isLoading) void verify() }, []) // Verify whenever CartPage mounts.
+  useEffect(() => { if (!isLoading) void verify() }, [isLoading]) // Verify whenever CartPage mounts.
 
   const blocked = !verifiedThisVisit || verifying || hasBlockingItems
   const subtotal = getSubtotal()
