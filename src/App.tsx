@@ -18,10 +18,14 @@ function getCurrentRoute(): AppRoute {
 function App() {
   const [isSplashVisible, setIsSplashVisible] = useState(true)
   const [route, setRoute] = useState<AppRoute>(getCurrentRoute)
+  const [hasInternalHistory, setHasInternalHistory] = useState(false)
 
   useEffect(() => {
     const splashTimer = window.setTimeout(() => setIsSplashVisible(false), 500)
-    const handleNavigation = () => setRoute(getCurrentRoute())
+    const handleNavigation = () => {
+      setRoute(getCurrentRoute())
+      setHasInternalHistory(true)
+    }
 
     window.addEventListener('hashchange', handleNavigation)
     return () => {
@@ -33,7 +37,15 @@ function App() {
   if (isSplashVisible) return <SplashScreen />
 
   if (route === 'cart' || route === 'notification' || route === 'livechat') {
-    return <StandalonePages route={route} />
+    const handleBack = () => {
+      if (hasInternalHistory) {
+        window.history.back()
+      } else {
+        window.location.hash = '#/home'
+      }
+    }
+
+    return <StandalonePages route={route} onBack={handleBack} />
   }
 
   const page = {
