@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useProducts } from '../../context/ProductsContext'
 import { useCart } from '../../context/CartContext'
-import type { ProductVariant } from '../../types/product'
 
 function formatPrice(value: number | null | undefined) {
   if (typeof value !== 'number' || !Number.isFinite(value)) return 'Price unavailable'
