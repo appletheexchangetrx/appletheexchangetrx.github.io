@@ -1,10 +1,10 @@
 import { Bell, ShoppingBag, UserRound } from 'lucide-react'
+import { useCart } from '../context/CartContext'
 
-type HeaderProps = {
-  bagCount: number
-}
+export default function Header() {
+  const { getItemCount } = useCart()
+  const bagCount = getItemCount()
 
-export default function Header({ bagCount }: HeaderProps) {
   return (
     <header className="app-header">
       <a className="app-brand" href="#/home" aria-label="Home">
