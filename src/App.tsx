@@ -6,6 +6,7 @@ import StandalonePages from './components/standalone/StandalonePages'
 import HomePage from './components/pages/HomePage'
 import ProductsPage from './components/pages/ProductsPage'
 import ProfilePage from './components/pages/ProfilePage'
+import { ProductsProvider } from './context/ProductsContext'
 
 type AppRoute = 'home' | 'products' | 'profile' | 'cart' | 'notification' | 'livechat'
 
@@ -36,16 +37,12 @@ function App() {
 
   if (isSplashVisible) return <SplashScreen />
 
-  if (route === 'cart' || route === 'notification' || route === 'livechat') {
-    const handleBack = () => {
-      if (hasInternalHistory) {
-        window.history.back()
-      } else {
-        window.location.hash = '#/home'
-      }
+  const handleBack = () => {
+    if (hasInternalHistory) {
+      window.history.back()
+    } else {
+      window.location.hash = '#/home'
     }
-
-    return <StandalonePages route={route} onBack={handleBack} />
   }
 
   const page = {
@@ -55,10 +52,16 @@ function App() {
   }[route]
 
   return (
-    <>
-      <AppShell activePage={route}>{page}</AppShell>
-      <Overlay />
-    </>
+    <ProductsProvider>
+      {route === 'cart' || route === 'notification' || route === 'livechat' ? (
+        <StandalonePages route={route} onBack={handleBack} />
+      ) : (
+        <>
+          <AppShell activePage={route}>{page}</AppShell>
+          <Overlay />
+        </>
+      )}
+    </ProductsProvider>
   )
 }
 
