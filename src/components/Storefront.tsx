@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Heart, MessageCircle } from 'lucide-react'
 
 const categories = ['All', 'iPhone', 'iPad', 'Mac', 'Watch', 'Audio']
 
@@ -15,7 +14,6 @@ const products = [
 export default function Storefront() {
   const [category, setCategory] = useState('All')
   const [search, setSearch] = useState('')
-  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({})
   const [activeHero, setActiveHero] = useState(0)
   const heroSliderRef = useRef<HTMLDivElement>(null)
 
@@ -151,18 +149,6 @@ export default function Storefront() {
               <h3>{product.name}</h3>
               <div className="storefront-product-footer">
                 <strong>{product.price}</strong>
-              </div>
-              <div className="storefront-product-social" aria-label="Product engagement">
-                <span className="storefront-social-action">
-                  <Heart size={14} strokeWidth={1.8} />
-                  <span>Like</span>
-                  <span className="storefront-like-count">{likeCounts[product.id] ?? 0}</span>
-                </span>
-                <span className="storefront-social-action">
-                  <MessageCircle size={14} strokeWidth={1.8} />
-                  <span>Comment</span>
-                  <span className="storefront-like-count">0</span>
-                </span>
               </div>
             </div>
           </article>
