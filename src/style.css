@@ -48,6 +48,9 @@ body {
 
 .app-header {
   display: flex;
+  height: 56px;
+  min-height: 56px;
+  flex: 0 0 56px;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
@@ -125,6 +128,9 @@ body {
 
 .bottom-nav {
   display: grid;
+  height: 64px;
+  min-height: 64px;
+  flex: 0 0 64px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   width: 100%;
@@ -133,7 +139,7 @@ body {
 }
 
 .bottom-nav-link {
-  padding: 10px 2px;
+  padding: 0 2px;
   color: #6e6e73;
   font-size: 12px;
   text-align: center;
@@ -445,8 +451,9 @@ h1 {
 
 .standalone-header {
   display: flex;
-  min-height: 52px;
-  flex: 0 0 auto;
+  height: 56px;
+  min-height: 56px;
+  flex: 0 0 56px;
   align-items: center;
   gap: 12px;
   padding: 8px;
@@ -481,7 +488,9 @@ h1 {
 }
 
 .standalone-bottom-action {
-  flex: 0 0 auto;
+  height: 64px;
+  min-height: 64px;
+  flex: 0 0 64px;
   padding: 8px;
   border-top: 1px solid #e5e5ea;
   background: #fff;
