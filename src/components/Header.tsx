@@ -11,11 +11,10 @@ export default function Header({ bagCount }: HeaderProps) {
         <img
           src="https://axednjikcambzbkxyqpp.supabase.co/storage/v1/object/public/images/logo.png"
           alt="The Exchange TRX"
-          width={20}
-          height={20}
-          style={{ width: 20, height: 20, objectFit: 'contain' }}
+          width={24}
+          height={24}
+          style={{ width: 24, height: 24, objectFit: 'contain' }}
         />
-        <span className="app-eyebrow">THE EXCHANGE TRX · KUALA LUMPUR</span>
       </div>
       <nav className="header-actions" aria-label="Account and shopping">
         <a className="header-action header-bag-action" href="#cart" aria-label={`Shopping bag, ${bagCount} items`}>
