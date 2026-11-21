@@ -45,8 +45,9 @@ export interface ProductsApiResponse {
   pagination?: ProductsPagination
 }
 
-export interface Product extends ApiProduct {
+export interface Product extends Omit<ApiProduct, 'variants'> {
   id: string
   category: string
+  variants: ProductVariant[]
   defaultVariant: ProductVariant | null
 }
