@@ -7,19 +7,20 @@ type StandaloneRoute = 'cart' | 'notification' | 'livechat'
 
 type StandalonePagesProps = {
   route: StandaloneRoute
+  onBack: () => void
 }
 
 const standalonePageConfig = {
   cart: { title: 'Cart', Page: CartPage },
   notification: { title: 'Notification', Page: NotificationPage },
   livechat: { title: 'Livechat', Page: LivechatPage },
-} satisfies Record<StandaloneRoute, { title: string; Page: () => JSX.Element }>
+} as const
 
-export default function StandalonePages({ route }: StandalonePagesProps) {
+export default function StandalonePages({ route, onBack }: StandalonePagesProps) {
   const { title, Page } = standalonePageConfig[route]
 
   return (
-    <StandaloneLayout title={title}>
+    <StandaloneLayout title={title} onBack={onBack}>
       <Page />
     </StandaloneLayout>
   )
