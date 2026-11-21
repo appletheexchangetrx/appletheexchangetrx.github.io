@@ -154,12 +154,14 @@ export default function CheckoutPage() {
     }
   }
 
-  const bottomAction = useMemo(() => <div className="checkout-bottom-content">
-    <div><span>Total</span><strong>{formatMoney(total)}</strong></div>
-    <button type="submit" form="checkout-form" disabled={blocked || submitting}>
-      {submitting ? 'Placing order…' : 'Place Order'}
-    </button>
-  </div>, [total, blocked, submitting])
+  const bottomAction = useMemo(() => items.length === 0
+    ? <a className="standalone-bottom-action-link" href="#/products">Explore Products</a>
+    : <div className="checkout-bottom-content">
+        <div><span>Total</span><strong>{formatMoney(total)}</strong></div>
+        <button type="submit" form="checkout-form" disabled={blocked || submitting}>
+          {submitting ? 'Placing order…' : 'Place Order'}
+        </button>
+      </div>, [items.length, total, blocked, submitting])
   useStandaloneBottomAction(bottomAction)
 
   if (validating) return <section className="standalone-state"><h2>Verifying your cart…</h2><p>Checking current product prices and stock.</p></section>
