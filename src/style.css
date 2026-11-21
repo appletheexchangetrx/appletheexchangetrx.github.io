@@ -496,3 +496,8 @@ h1 {
   font-size: 24px;
   letter-spacing: -.04em;
 }
+
+
+/* Product catalog API states */
+.storefront-product-image-fallback { color:#c7c7cc; font-size:42px; }
+.products-page { padding: 0 0 20px; }
