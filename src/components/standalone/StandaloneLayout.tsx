@@ -12,7 +12,7 @@ type StandaloneLayoutProps = {
 
 export default function StandaloneLayout({ title, children, onBack }: StandaloneLayoutProps) {
   const [bottomAction, setBottomAction] = useState<ReactNode>(null)
-  const actionContext = useMemo(() => ({ setBottomAction }), [])
+  const actionContext = useMemo(() => ({ setBottomAction }), [setBottomAction])
 
   return (
     <StandaloneBottomActionContext.Provider value={actionContext}>
