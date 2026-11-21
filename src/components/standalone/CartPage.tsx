@@ -55,7 +55,7 @@ export default function CartPage() {
       <p>{notice || 'Your saved cart is displayed. Checkout is unavailable until product data can be verified.'}</p>
     </div>}
     {verifying && <p className="cart-verifying" role="status">Verifying prices and stock…</p>}
-    <div className="cart-items">{items.map((item) => {
+    <div className="cart-content"><div className="cart-items">{items.map((item) => {
       const price = item.sale_price ?? item.price
       const unavailable = item.status === 'unavailable'
       return <article className="cart-item" key={itemKey(item)}>
@@ -79,7 +79,7 @@ export default function CartPage() {
           </div>
         </div>
       </article>
-    })}</div>
+    })}</div></div>
     <section className="cart-summary"><h2>Order Summary</h2><div><span>Subtotal</span><strong>{money(subtotal)}</strong></div><div><span>Shipping</span><span>Calculated at checkout</span></div><div className="cart-total"><strong>Total</strong><strong>{money(subtotal)}</strong></div></section>
     {blocked && <p className="cart-checkout-hint">Checkout is disabled until every item has verified availability and stock.</p>}
     {removeTarget && <div className="cart-dialog-backdrop" role="presentation"><div className="cart-dialog" role="dialog" aria-modal="true" aria-labelledby="cart-remove-title">
