@@ -3,7 +3,7 @@ import { useCart } from '../../context/CartContext'
 import { useProducts } from '../../context/ProductsContext'
 import type { CartItem } from '../../types/cart'
 import { useStandaloneBottomAction } from './StandaloneBottomActionContext'
-import { formatMoney, SHIPPING_FEE } from '../../services/shipping'
+import { SHIPPING_FEE } from '../../services/shipping'
 
 function money(value: number | null) {
   if (value == null || !Number.isFinite(value)) return 'Price unavailable'
