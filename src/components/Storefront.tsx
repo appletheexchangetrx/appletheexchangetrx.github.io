@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import ProductCatalog from './ProductCatalog'
 
 const categories = ['All', 'iPhone', 'iPad', 'Mac', 'Watch', 'Audio']
 
@@ -12,8 +13,6 @@ const products = [
 ]
 
 export default function Storefront() {
-  const [category, setCategory] = useState('All')
-  const [search, setSearch] = useState('')
   const [activeHero, setActiveHero] = useState(0)
   const heroSliderRef = useRef<HTMLDivElement>(null)
 
@@ -35,12 +34,6 @@ export default function Storefront() {
 
     return () => window.clearInterval(interval)
   }, [])
-
-  const visibleProducts = useMemo(() => products.filter((product) => {
-    const matchesCategory = category === 'All' || product.category === category
-    const matchesSearch = `${product.name} ${product.detail}`.toLowerCase().includes(search.toLowerCase())
-    return matchesCategory && matchesSearch
-  }), [category, search])
 
   return (
     <div className="storefront">
@@ -104,64 +97,7 @@ export default function Storefront() {
         </div>
       </section>
 
-      <div className="storefront-section-heading">
-        <div>
-          <span className="storefront-kicker">CURATED FOR YOU</span>
-          <h2>Shop products</h2>
-        </div>
-        <span className="storefront-count">{visibleProducts.length} items</span>
-      </div>
-
-      <div className="storefront-search">
-        <input
-          className="storefront-search-input"
-          type="search"
-          value={search}
-          placeholder="Search products"
-          aria-label="Search products"
-          onChange={(event) => setSearch(event.target.value)}
-        />
-      </div>
-
-      <div className="storefront-categories" role="group" aria-label="Product categories">
-        {categories.map((item) => (
-          <button
-            key={item}
-            type="button"
-            className={`storefront-category-chip${category === item ? ' is-active' : ''}`}
-            aria-pressed={category === item}
-            onClick={() => setCategory(item)}
-          >
-            {item}
-          </button>
-        ))}
-      </div>
-
-      <div className="storefront-products" id="store-products">
-        {visibleProducts.map((product) => (
-          <article key={product.id} className="storefront-product-card">
-            <div className="storefront-product-image-wrap">
-              {product.tag && <span className="storefront-product-tag">{product.tag}</span>}
-              <img src={product.image} alt={product.name} loading="lazy" className="storefront-product-image" />
-            </div>
-            <div className="storefront-product-info">
-              <span className="storefront-product-category">{product.category}</span>
-              <h3>{product.name}</h3>
-              <div className="storefront-product-footer">
-                <strong>{product.price}</strong>
-              </div>
-            </div>
-          </article>
-        ))}
-        {visibleProducts.length === 0 && (
-          <div className="storefront-empty">
-            <span aria-hidden="true">⌕</span>
-            <h3>No products found</h3>
-            <p>Try another search or category.</p>
-            <button className="storefront-clear-filters" type="button" onClick={() => { setSearch(''); setCategory('All') }}>Clear filters</button>
-          </div>
-        )}
-      </div>
+      <ProductCatalog />
 
       <section className="storefront-visit">
         <span className="storefront-kicker">COME SAY HELLO</span>
