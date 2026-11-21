@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useCart } from '../../context/CartContext'
 import { useProducts } from '../../context/ProductsContext'
 import type { CartItem } from '../../types/cart'
+import { useStandaloneBottomAction } from './StandaloneBottomActionContext'
 
 function money(value: number | null) {
   if (value == null || !Number.isFinite(value)) return 'Price unavailable'
@@ -31,13 +32,21 @@ export default function CartPage() {
       setVerifying(false)
     }
   }
-  useEffect(() => { if (!isLoading) void verify() }, [isLoading]) // Verify whenever CartPage mounts.
+  useEffect(() => { if (!isLoading) void verify() }, [isLoading])
 
   const blocked = !verifiedThisVisit || verifying || hasBlockingItems
   const subtotal = getSubtotal()
+  const bottomAction = useMemo(() => items.length === 0
+    ? <a className="standalone-bottom-action-link" href="#/products">Continue shopping</a>
+    : <div className="cart-bottom-content">
+        <div><span>Total</span><strong>{money(subtotal)}</strong></div>
+        <button type="button" disabled={blocked} onClick={() => { window.location.hash = '#/checkout' }}>Checkout</button>
+      </div>, [items.length, subtotal, blocked])
+  useStandaloneBottomAction(bottomAction)
+
   if (items.length === 0) return <section className="cart-page cart-empty">
     <div className="standalone-state"><span className="standalone-state-icon">▢</span><h2>Your cart is empty</h2>
-      <p>Discover products and add your favorites to your cart.</p><a className="standalone-outline-action" href="#/products">Continue shopping</a></div>
+      <p>Discover products and add your favorites to your cart.</p></div>
   </section>
 
   return <section className="cart-page">
@@ -72,7 +81,6 @@ export default function CartPage() {
       </article>
     })}</div>
     <section className="cart-summary"><h2>Order Summary</h2><div><span>Subtotal</span><strong>{money(subtotal)}</strong></div><div><span>Shipping</span><span>Calculated at checkout</span></div><div className="cart-total"><strong>Total</strong><strong>{money(subtotal)}</strong></div></section>
-    <div className="cart-bottom-action"><div><span>Total</span><strong>{money(subtotal)}</strong></div><button type="button" disabled={blocked} onClick={() => { window.location.hash = '#/checkout' }}>Checkout</button></div>
     {blocked && <p className="cart-checkout-hint">Checkout is disabled until every item has verified availability and stock.</p>}
     {removeTarget && <div className="cart-dialog-backdrop" role="presentation"><div className="cart-dialog" role="dialog" aria-modal="true" aria-labelledby="cart-remove-title">
       <h2 id="cart-remove-title">Remove item?</h2><p>Remove {removeTarget.title} from your cart?</p>
