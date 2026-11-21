@@ -3,6 +3,9 @@ import type { ApiProduct, Product, ProductsApiResponse } from '../types/product'
 export const PRODUCTS_ENDPOINT =
   'https://axednjikcambzbkxyqpp.supabase.co/functions/v1/get-products'
 
+// Publishable keys are intended for browser clients. Never place a service-role/secret key here.
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Vysddy5_b0uZ3iKgnkDTIw_X5O1pBEd'
+
 const PAGE_LIMIT = 100
 
 function normalizeProduct(item: ApiProduct, index: number): Product {
@@ -26,7 +29,10 @@ async function fetchProductsPage(page: number, signal?: AbortSignal) {
   url.searchParams.set('limit', String(PAGE_LIMIT))
   const response = await fetch(url.toString(), {
     method: 'GET',
-    headers: { Accept: 'application/json' },
+    headers: {
+      Accept: 'application/json',
+      apikey: SUPABASE_PUBLISHABLE_KEY,
+    },
     signal,
   })
   if (!response.ok) throw new Error(`Unable to load products (HTTP ${response.status})`)
