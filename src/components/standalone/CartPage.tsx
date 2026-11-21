@@ -3,6 +3,7 @@ import { useCart } from '../../context/CartContext'
 import { useProducts } from '../../context/ProductsContext'
 import type { CartItem } from '../../types/cart'
 import { useStandaloneBottomAction } from './StandaloneBottomActionContext'
+import { formatMoney, SHIPPING_FEE } from '../../services/shipping'
 
 function money(value: number | null) {
   if (value == null || !Number.isFinite(value)) return 'Price unavailable'
@@ -36,10 +37,11 @@ export default function CartPage() {
 
   const blocked = !verifiedThisVisit || verifying || hasBlockingItems
   const subtotal = getSubtotal()
+  const total = subtotal + SHIPPING_FEE
   const bottomAction = useMemo(() => items.length === 0
     ? <a className="standalone-bottom-action-link" href="#/products">Continue shopping</a>
     : <div className="cart-bottom-content">
-        <div><span>Total</span><strong>{money(subtotal)}</strong></div>
+        <div><span>Total</span><strong>{money(total)}</strong></div>
         <button type="button" disabled={blocked} onClick={() => { window.location.hash = '#/checkout' }}>Checkout</button>
       </div>, [items.length, subtotal, blocked])
   useStandaloneBottomAction(bottomAction)
@@ -80,7 +82,7 @@ export default function CartPage() {
         </div>
       </article>
     })}</div></div>
-    <section className="cart-summary"><h2>Order Summary</h2><div><span>Subtotal</span><strong>{money(subtotal)}</strong></div><div><span>Shipping</span><span>Calculated at checkout</span></div><div className="cart-total"><strong>Total</strong><strong>{money(subtotal)}</strong></div></section>
+    <section className="cart-summary"><h2>Order Summary</h2><div><span>Subtotal</span><strong>{money(subtotal)}</strong></div><div><span>Shipping</span><strong>{money(SHIPPING_FEE)}</strong></div><div className="cart-total"><strong>Total</strong><strong>{money(total)}</strong></div></section>
     {blocked && <p className="cart-checkout-hint">Checkout is disabled until every item has verified availability and stock.</p>}
     {removeTarget && <div className="cart-dialog-backdrop" role="presentation"><div className="cart-dialog" role="dialog" aria-modal="true" aria-labelledby="cart-remove-title">
       <h2 id="cart-remove-title">Remove item?</h2><p>Remove {removeTarget.title} from your cart?</p>
