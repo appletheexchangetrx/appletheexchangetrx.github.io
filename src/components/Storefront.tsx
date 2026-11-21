@@ -1,17 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import ProductCatalog from './ProductCatalog'
 
-const categories = ['All', 'iPhone', 'iPad', 'Mac', 'Watch', 'Audio']
-
-const products = [
-  { id: 'iphone-17-pro', name: 'iPhone 17 Pro', category: 'iPhone', detail: 'A19 Pro chip · Pro camera system', price: 'RM 5,499', image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=900&q=85', tag: 'New' },
-  { id: 'macbook-air', name: 'MacBook Air', category: 'Mac', detail: 'M4 chip · Built for Apple Intelligence', price: 'RM 4,499', image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=900&q=85', tag: 'Popular' },
-  { id: 'ipad-air', name: 'iPad Air', category: 'iPad', detail: 'M3 chip · 11-inch and 13-inch', price: 'RM 2,799', image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=900&q=85' },
-  { id: 'apple-watch', name: 'Apple Watch Series 11', category: 'Watch', detail: 'Health insights · Always-on display', price: 'RM 1,799', image: 'https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?auto=format&fit=crop&w=900&q=85' },
-  { id: 'airpods-pro', name: 'AirPods Pro', category: 'Audio', detail: 'Active Noise Cancellation · USB-C', price: 'RM 999', image: 'https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?auto=format&fit=crop&w=900&q=85' },
-  { id: 'iphone-17', name: 'iPhone 17', category: 'iPhone', detail: 'All-new design · Brilliant display', price: 'RM 3,999', image: 'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=85' },
-]
-
 export default function Storefront() {
   const [activeHero, setActiveHero] = useState(0)
   const heroSliderRef = useRef<HTMLDivElement>(null)
