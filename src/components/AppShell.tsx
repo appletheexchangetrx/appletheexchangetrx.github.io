@@ -17,9 +17,10 @@ export function useStorefrontCart() {
 
 type AppShellProps = {
   children: ReactNode
+  activePage: 'home' | 'products' | 'profile'
 }
 
-export default function AppShell({ children }: AppShellProps) {
+export default function AppShell({ children, activePage }: AppShellProps) {
   const [bagCount, setBagCount] = useState(0)
   const addToBag = () => setBagCount((count) => count + 1)
 
@@ -28,7 +29,7 @@ export default function AppShell({ children }: AppShellProps) {
       <div className="app-shell">
         <Header bagCount={bagCount} />
         <Main>{children}</Main>
-        <BottomNav />
+        <BottomNav activePage={activePage} />
       </div>
     </StorefrontCartContext.Provider>
   )
