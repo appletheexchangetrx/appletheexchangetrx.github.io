@@ -45,7 +45,7 @@ export default function OrderDetailPage({ orderId }: { orderId?: string }) {
       <h3>Payment & Delivery</h3>
       <div className="checkout-total-row"><span>Payment status</span><strong>{order.payment_status}</strong></div>
       <div className="checkout-total-row"><span>Shipping status</span><strong>{order.shipping_status}</strong></div>
-      <p className="checkout-muted">Payment and delivery arrangements will be confirmed separately.</p>
+      <p className="checkout-muted">No courier, tracking number, or payment provider is connected. The statuses shown here are local order records and do not represent live fulfilment updates.</p><ol className="order-timeline"><li className="is-current"><strong>Order saved</strong><span>{new Date(order.created_at).toLocaleString('en-MY')}</span></li><li><strong>Payment confirmation</strong><span>Pending manual arrangement</span></li><li><strong>Shipment</strong><span>Not yet arranged</span></li></ol>
     </section>
     <section className="order-detail-section checkout-summary">
       <div className="checkout-total-row"><span>Subtotal</span><strong>{formatMoney(order.subtotal)}</strong></div>

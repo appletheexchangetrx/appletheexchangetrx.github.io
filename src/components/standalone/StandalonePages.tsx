@@ -18,8 +18,8 @@ export default function StandalonePages({ route, routeId, onBack }: StandalonePa
   const page = (() => {
     switch (route) {
       case 'cart': return { title: 'Cart', content: <CartPage /> }
-      case 'notification': return { title: 'Notification', content: <NotificationPage /> }
-      case 'livechat': return { title: 'Livechat', content: <LivechatPage /> }
+      case 'notification': return { title: 'Notifications', content: <NotificationPage /> }
+      case 'livechat': return { title: 'Chat with us', content: <LivechatPage /> }
       case 'product': return { title: 'Product details', content: <ProductDetailPage productId={routeId} /> }
       case 'checkout': return { title: 'Checkout', content: <CheckoutPage /> }
       case 'orders': return { title: 'My orders', content: <OrdersPage /> }

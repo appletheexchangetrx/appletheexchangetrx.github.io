@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import BottomNav from './BottomNav'
 import Header from './Header'
 import Main from './Main'
+import Footer from './layout/Footer'
 
 type AppShellProps = {
   children: ReactNode
@@ -13,6 +14,7 @@ export default function AppShell({ children, activePage }: AppShellProps) {
     <div className="app-shell">
       <Header />
       <Main>{children}</Main>
+      <Footer />
       <BottomNav activePage={activePage} />
     </div>
   )

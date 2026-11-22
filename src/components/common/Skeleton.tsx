@@ -1,0 +1,2 @@
+type Props={lines?:number;className?:string}
+export default function Skeleton({lines=3,className=''}:Props){return <div className={`ui-skeleton ${className}`} aria-label="Loading" role="status">{Array.from({length:lines},(_,i)=><span key={i}/>)}</div>}

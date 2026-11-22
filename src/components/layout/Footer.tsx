@@ -1,0 +1,1 @@
+export default function Footer(){return <footer className="site-footer"><p>Apple The Exchange TRX</p><nav aria-label="Footer"><a href="#/products">Shop</a><a href="#/orders">Orders</a><a href="#/profile">Profile</a></nav><small>Product availability and prices may change. All trademarks belong to their respective owners.</small></footer>}

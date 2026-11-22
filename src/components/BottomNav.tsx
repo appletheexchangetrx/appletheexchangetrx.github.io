@@ -18,7 +18,7 @@ export default function BottomNav({ activePage }: BottomNavProps) {
           className={`bottom-nav-link${activePage === page ? ' is-active' : ''}`}
           href={href}
           key={label}
-          aria-current={activePage === page ? 'page' : undefined}
+          aria-current={activePage === page ? 'page' : undefined}\n          data-navigation-item={page}
         >
           <Icon size={19} strokeWidth={1.7} aria-hidden="true" />
           <span>{label}</span>

@@ -7,7 +7,7 @@ export default function Header() {
 
   return (
     <header className="app-header">
-      <a className="app-brand" href="#/home" aria-label="Home">
+      <a className="app-brand" href="#/home" aria-label="Apple The Exchange TRX home">
         <img
           src="https://axednjikcambzbkxyqpp.supabase.co/storage/v1/object/public/images/logo.png"
           alt="The Exchange TRX"

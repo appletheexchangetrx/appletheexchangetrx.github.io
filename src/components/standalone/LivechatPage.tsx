@@ -1,7 +1,8 @@
-export default function LivechatPage() {
-  return (
-    <section className="page-placeholder">
-      <h1>Livechat</h1>
-    </section>
-  )
+import { useState, type FormEvent } from 'react'
+type Message={id:number;body:string;from:'you'|'store';time:string}
+export default function LivechatPage(){
+ const [messages,setMessages]=useState<Message[]>([{id:1,body:'Welcome to Apple The Exchange TRX. This is a local chat preview; messages are not sent to a support team.',from:'store',time:'Now'}])
+ const [draft,setDraft]=useState('')
+ function send(event:FormEvent<HTMLFormElement>){event.preventDefault();const body=draft.trim();if(!body)return;setMessages(current=>[...current,{id:Date.now(),body,from:'you',time:'Now'}]);setDraft('')}
+ return <section className="livechat-page"><header><span className="storefront-kicker">CUSTOMER CARE</span><h1>Livechat</h1><p className="chat-availability">Offline preview · No agent connected</p></header><div className="chat-messages" aria-live="polite">{messages.map(message=><article key={message.id} className={`chat-message chat-message--${message.from}`}><p>{message.body}</p><small>{message.time}</small></article>)}</div><form className="chat-composer" onSubmit={send}><label className="sr-only" htmlFor="chat-message">Message</label><input id="chat-message" value={draft} onChange={event=>setDraft(event.target.value)} placeholder="Write a message…" maxLength={1000}/><button type="submit" disabled={!draft.trim()}>Send</button></form><p className="chat-disclaimer">Messages stay in this page session and are not delivered to customer support.</p></section>
 }

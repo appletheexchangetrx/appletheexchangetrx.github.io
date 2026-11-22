@@ -4,6 +4,7 @@ import { useProducts } from '../../context/ProductsContext'
 import type { CartItem } from '../../types/cart'
 import { useStandaloneBottomAction } from './StandaloneBottomActionContext'
 import { SHIPPING_FEE } from '../../services/shipping'
+import { useWishlist } from '../../context/WishlistContext'
 
 function money(value: number | null) {
   if (value == null || !Number.isFinite(value)) return 'Price unavailable'
@@ -13,7 +14,8 @@ function itemKey(item: CartItem) { return item.item_group_id + ':' + item.varian
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, getSubtotal, hasBlockingItems, syncCart } = useCart()
-  const { isLoading, error, refresh } = useProducts()
+  const { isLoading, error, refresh, products } = useProducts()
+  const { has: isWishlisted, toggle: toggleWishlist } = useWishlist()
   const [verifying, setVerifying] = useState(false)
   const [verifiedThisVisit, setVerifiedThisVisit] = useState(false)
   const [notice, setNotice] = useState<string | null>(null)
@@ -77,7 +79,7 @@ export default function CartPage() {
               <span>{item.quantity}</span>
               <button type="button" aria-label="Increase quantity" disabled={item.quantity_to_sell_on_facebook == null || item.quantity >= item.quantity_to_sell_on_facebook} onClick={() => updateQuantity(item.item_group_id, item.variant_id, item.quantity + 1)}>+</button>
             </div>
-            <button type="button" className="cart-remove" onClick={() => setRemoveTarget(item)}>Remove</button>
+            <div className="cart-secondary-actions"><button type="button" className="cart-remove" onClick={() => setRemoveTarget(item)}>Remove</button><button type="button" className="cart-save" disabled={!products.some(product=>product.item_group_id===item.item_group_id)} onClick={()=>{const product=products.find(value=>value.item_group_id===item.item_group_id);if(product)toggleWishlist(product.id)}}>{products.find(product=>product.item_group_id===item.item_group_id&&isWishlisted(product.id))?"In Wishlist":"Add to Wishlist"}</button></div>
           </div>
         </div>
       </article>

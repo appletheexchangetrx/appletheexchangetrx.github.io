@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import ProductCatalog from './ProductCatalog'
+import { useProducts } from '../context/ProductsContext'
+import ProductCard from './product/ProductCard'
 
 export default function Storefront() {
+  const { products } = useProducts()
   const [activeHero, setActiveHero] = useState(0)
   const heroSliderRef = useRef<HTMLDivElement>(null)
 
@@ -86,6 +89,7 @@ export default function Storefront() {
         </div>
       </section>
 
+      <section className="featured-section"><div className="storefront-section-heading"><div><span className="storefront-kicker">THE LATEST</span><h2>Featured products</h2></div><a href="#/products">View all</a></div><div className="featured-products">{products.slice(0,4).map(product=><ProductCard key={product.id} product={product}/>)}</div></section>
       <ProductCatalog />
 
       <section className="storefront-visit">

@@ -1,0 +1,1 @@
+export interface WishlistRecord { version:1; ids:string[] }

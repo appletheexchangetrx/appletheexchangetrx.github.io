@@ -1,0 +1,2 @@
+type Props={title?:string;message:string;onRetry?:()=>void}
+export default function ErrorState({title='Something went wrong',message,onRetry}:Props){return <section className="ui-state" role="alert"><span aria-hidden="true">!</span><h2>{title}</h2><p>{message}</p>{onRetry&&<button type="button" onClick={onRetry}>Try again</button>}</section>}

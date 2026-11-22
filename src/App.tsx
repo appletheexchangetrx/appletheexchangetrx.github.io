@@ -8,6 +8,7 @@ import ProductsPage from './components/pages/ProductsPage'
 import ProfilePage from './components/pages/ProfilePage'
 import { ProductsProvider } from './context/ProductsContext'
 import { CartProvider } from './context/CartContext'
+import { WishlistProvider } from './context/WishlistContext'
 
 type RouteState = { name: string; id?: string }
 function getCurrentRoute(): RouteState {
@@ -34,5 +35,5 @@ function AppContent() {
   return <StandalonePages route={route.name} routeId={route.id} onBack={handleBack} />
 }
 export default function App() {
-  return <ProductsProvider><CartProvider><AppContent /></CartProvider></ProductsProvider>
+  return <ProductsProvider><CartProvider><WishlistProvider><AppContent /></WishlistProvider></CartProvider></ProductsProvider>
 }

@@ -15,7 +15,7 @@ export default function OrderConfirmationPage({ orderId }: { orderId?: string })
     <span className="order-confirmation-check" aria-hidden="true">✓</span>
     <span className="storefront-kicker">ORDER PLACED</span>
     <h2>Thank you for your order</h2>
-    <p>Your order has been saved successfully in this browser.</p>
+    <p>Your order record has been saved in this browser. This is not a payment confirmation.</p>
     <div className="order-confirmation-reference"><span>Order Number</span><strong>{order.order_number}</strong><span>Total</span><strong>{formatMoney(order.total)}</strong></div>
     <p className="checkout-muted">Payment status: pending. Payment arrangements have not been configured yet.</p>
   </section>

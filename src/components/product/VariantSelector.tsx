@@ -1,0 +1,2 @@
+type Props={label:string;values:string[];selected:string|null;onChange:(value:string)=>void}
+export default function VariantSelector({label,values,selected,onChange}:Props){if(!values.length)return null;return <div className="product-variant-group"><strong>{label}</strong><div className="product-size-options">{values.map(value=><button key={value} type="button" className={selected===value?'is-selected':''} aria-pressed={selected===value} onClick={()=>onChange(value)}>{value}</button>)}</div></div>}

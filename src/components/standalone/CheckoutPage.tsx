@@ -196,7 +196,7 @@ export default function CheckoutPage() {
 
       <section className="checkout-section">
         <h2>Payment</h2>
-        <p className="checkout-muted">Payment method has not been configured yet. Payment status will remain pending.</p>
+        <p className="checkout-muted">Payment is not connected in this frontend-only version. No payment will be collected here; every locally saved order remains pending until arrangements are confirmed separately.</p>
       </section>
 
       <section className="checkout-section checkout-summary">

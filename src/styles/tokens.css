@@ -1,0 +1,11 @@
+:root {
+  --aet-color-text: #1d1d1f;
+  --aet-color-muted: #6e6e73;
+  --aet-color-border: #e5e5ea;
+  --aet-color-surface: #f5f5f7;
+  --aet-color-accent: #06c;
+  --aet-radius-card: 16px;
+  --aet-radius-control: 10px;
+  --aet-content-width: 1200px;
+  --aet-space-page: clamp(14px, 2.5vw, 28px);
+}

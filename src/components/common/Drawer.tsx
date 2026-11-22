@@ -1,0 +1,3 @@
+import type { ReactNode } from 'react'
+type Props={open:boolean;title:string;onClose:()=>void;children:ReactNode}
+export default function Drawer({open,title,onClose,children}:Props){if(!open)return null;return <div className="ui-drawer-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget)onClose()}}><section className="ui-drawer" role="dialog" aria-modal="true" aria-label={title}><header><h2>{title}</h2><button type="button" onClick={onClose} aria-label="Close">×</button></header>{children}</section></div>}

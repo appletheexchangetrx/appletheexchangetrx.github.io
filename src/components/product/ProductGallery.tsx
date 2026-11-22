@@ -1,0 +1,3 @@
+import { useState } from 'react'
+type Props={title:string;images:string[]}
+export default function ProductGallery({title,images}:Props){const [active,setActive]=useState(0);return <div className="product-gallery"><div className="product-detail-image">{images[active]?<img src={images[active]} alt={title}/>:<span aria-hidden="true">◎</span>}</div>{images.length>1&&<div className="product-gallery-dots">{images.map((src,index)=><button key={src+index} type="button" aria-label={`Show image ${index+1}`} aria-pressed={active===index} className={active===index?'is-active':''} onClick={()=>setActive(index)}/>)}</div>}</div>}
