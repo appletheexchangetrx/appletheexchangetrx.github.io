@@ -6,16 +6,16 @@ import Footer from './layout/Footer'
 
 type AppShellProps = {
   children: ReactNode
-  activePage: 'home' | 'products' | 'profile'
+  activePage: 'home' | 'products' | 'profile' | 'wishlist'
 }
 
 export default function AppShell({ children, activePage }: AppShellProps) {
   return (
     <div className="app-shell">
       <Header />
+      <BottomNav activePage={activePage} />
       <Main>{children}</Main>
       <Footer />
-      <BottomNav activePage={activePage} />
     </div>
   )
 }
