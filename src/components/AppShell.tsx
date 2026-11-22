@@ -13,9 +13,9 @@ export default function AppShell({ children, activePage }: AppShellProps) {
   return (
     <div className="app-shell">
       <Header />
-      <BottomNav activePage={activePage} />
       <Main>{children}</Main>
       <Footer />
+      <BottomNav activePage={activePage} />
     </div>
   )
 }
