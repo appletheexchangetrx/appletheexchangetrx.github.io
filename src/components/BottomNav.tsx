@@ -1,12 +1,13 @@
-import { House, LayoutGrid, MessageCircle } from 'lucide-react'
+import { Heart, House, LayoutGrid, MessageCircle } from 'lucide-react'
 
 type BottomNavProps = {
-  activePage: 'home' | 'products' | 'profile'
+  activePage: 'home' | 'products' | 'profile' | 'wishlist'
 }
 
 const navigationItems = [
   { label: 'Home', href: '#/home', page: 'home', Icon: House },
   { label: 'Products', href: '#/products', page: 'products', Icon: LayoutGrid },
+  { label: 'Wishlist', href: '#/wishlist', page: 'wishlist', Icon: Heart },
   { label: 'Livechat', href: '#/livechat', page: 'livechat', Icon: MessageCircle },
 ] as const
 
@@ -17,8 +18,9 @@ export default function BottomNav({ activePage }: BottomNavProps) {
         <a
           className={`bottom-nav-link${activePage === page ? ' is-active' : ''}`}
           href={href}
-          key={label}
-          aria-current={activePage === page ? 'page' : undefined}\n          data-navigation-item={page}
+          key={page}
+          aria-current={activePage === page ? 'page' : undefined}
+          data-navigation-item={page}
         >
           <Icon size={19} strokeWidth={1.7} aria-hidden="true" />
           <span>{label}</span>
