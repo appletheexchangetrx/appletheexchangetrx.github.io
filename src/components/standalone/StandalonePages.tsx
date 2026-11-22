@@ -6,6 +6,7 @@ import OrderConfirmationPage from './OrderConfirmationPage'
 import OrderDetailPage from './OrderDetailPage'
 import OrdersPage from './OrdersPage'
 import ProductDetailPage from './ProductDetailPage'
+import NotFoundPage from './NotFoundPage'
 import StandaloneLayout from './StandaloneLayout'
 
 type StandalonePagesProps = {
@@ -25,7 +26,7 @@ export default function StandalonePages({ route, routeId, onBack }: StandalonePa
       case 'orders': return { title: 'My orders', content: <OrdersPage /> }
       case 'order': return { title: 'Order details', content: <OrderDetailPage orderId={routeId} /> }
       case 'order-confirmation': return { title: 'Order confirmation', content: <OrderConfirmationPage orderId={routeId} /> }
-      default: return { title: 'Page not found', content: <div className="page-placeholder"><p>This page could not be found.</p></div> }
+      default: return { title: 'Page not found', content: <NotFoundPage /> }
     }
   })()
 
