@@ -13,8 +13,10 @@ export default function AppShell({ children, activePage }: AppShellProps) {
   return (
     <div className="app-shell">
       <Header />
-      <Main>{children}</Main>
-      <Footer />
+      <Main>
+        {children}
+        <Footer />
+      </Main>
       <BottomNav activePage={activePage} />
     </div>
   )
